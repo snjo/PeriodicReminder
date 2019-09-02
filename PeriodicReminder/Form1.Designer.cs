@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.PerformedTask = new System.Windows.Forms.Button();
+            this.PerformedTaskButton = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
@@ -38,18 +38,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
-            // PerformedTask
+            // PerformedTaskButton
             // 
-            this.PerformedTask.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.PerformedTaskButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PerformedTask.Location = new System.Drawing.Point(12, 73);
-            this.PerformedTask.Name = "PerformedTask";
-            this.PerformedTask.Size = new System.Drawing.Size(260, 161);
-            this.PerformedTask.TabIndex = 0;
-            this.PerformedTask.Text = "I did the thing";
-            this.PerformedTask.UseVisualStyleBackColor = true;
-            this.PerformedTask.Click += new System.EventHandler(this.PerformedTask_Click);
+            this.PerformedTaskButton.Location = new System.Drawing.Point(12, 73);
+            this.PerformedTaskButton.Name = "PerformedTaskButton";
+            this.PerformedTaskButton.Size = new System.Drawing.Size(260, 161);
+            this.PerformedTaskButton.TabIndex = 0;
+            this.PerformedTaskButton.Text = "I did the thing";
+            this.PerformedTaskButton.UseVisualStyleBackColor = true;
+            this.PerformedTaskButton.Click += new System.EventHandler(this.PerformedTask_Click);
             // 
             // numericUpDown1
             // 
@@ -114,7 +114,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numericUpDown2);
             this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.PerformedTask);
+            this.Controls.Add(this.PerformedTaskButton);
             this.Name = "Form1";
             this.Text = "Periodic Reminder";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -127,7 +127,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button PerformedTask;
+        private System.Windows.Forms.Button PerformedTaskButton;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.Label label1;
