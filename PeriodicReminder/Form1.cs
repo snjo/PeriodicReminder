@@ -27,6 +27,16 @@ namespace PeriodicReminder
         public Form1()
         {
             InitializeComponent();
+            if (Program.commandLineArguments.Length > 0)
+            {
+                string windowTitle = "";
+                for (int i = 0; i < Program.commandLineArguments.Length; i++)
+                {
+                    windowTitle += Program.commandLineArguments[i] + " ";
+                }
+                this.Text += ": " + windowTitle;
+                PerformedTaskButton.Text = windowTitle;
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
