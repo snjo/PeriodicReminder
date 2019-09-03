@@ -13,7 +13,7 @@ namespace PeriodicReminder
 {
     public partial class Form1 : Form
     {
-        System.Timers.Timer timer;
+        System.Windows.Forms.Timer timer;
         System.Timers.Timer blinkTimer2;
         bool acknowledgedReminder = true;
         List<Color> BlinkColors = new List<Color> { Color.Red, Color.Yellow, Color.Orange };
@@ -61,13 +61,15 @@ namespace PeriodicReminder
 
         private void StartTimer()
         {
-            timer = new System.Timers.Timer((Double)numericUpDown1.Value * 60000d);
+            timer = new System.Windows.Forms.Timer();
+            timer.Interval = (int)numericUpDown1.Value * 60000;
 
-            //timer = new System.Timers.Timer(1000d);  //---------------------------------------TEST---------------------------------
+            //timer.Interval = 5000;  //---------------------------------------TEST---------------------------------
 
-            timer.Elapsed += ElapsedTimer;
-            timer.AutoReset = true;
+            timer.Tick += new EventHandler(ElapsedTimer);
+            //timer.AutoReset = true;
             timer.Enabled = true;
+            timer.Start();
         }
 
         private void DebugTimerEvent(object sender, ElapsedEventArgs e)
@@ -75,16 +77,18 @@ namespace PeriodicReminder
             //label1.Text = "test";
         }
 
-        private void ElapsedTimer(object sender, ElapsedEventArgs e)
+        private void ElapsedTimer(object sender, EventArgs e)
         {
             //PerformedTaskButton.BackColor = Color.Blue; // test
             //blinkTimer.Interval = blinkFrequency;
             //blinkTimer.Enabled = true;
             //blinkTimer.Start();
-            timer.Interval = (Double)numericUpDown2.Value *60000d;
+            timer.Interval = (int)numericUpDown2.Value *60000;
             timer.Enabled = true;
+            timer.Start();
             acknowledgedReminder = false;
             System.Media.SystemSounds.Beep.Play();
+            FlashWindow.Flash(this);
         }
 
         private void PerformedTask_Click(object sender, EventArgs e)
