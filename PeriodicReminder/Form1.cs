@@ -19,6 +19,10 @@ namespace PeriodicReminder
         List<Color> BlinkColors = new List<Color> { Color.Red, Color.Yellow, Color.Orange };
         int blinkCounter = 0;
         int blinkFrequency = 5000;
+        string reminderText = "I did the thing";
+        string windowTitle = "Periodic Reminder";
+        string buttonTitle = "I did the thing";
+        DateTime nextAlert;
 
         //System.Timers.Timer debugTimer;
         //float minutes = 56f;
@@ -29,14 +33,16 @@ namespace PeriodicReminder
             InitializeComponent();
             if (Program.commandLineArguments.Length > 0)
             {
-                string windowTitle = "";
+                reminderText = "";
                 for (int i = 0; i < Program.commandLineArguments.Length; i++)
                 {
-                    windowTitle += Program.commandLineArguments[i] + " ";
+                    reminderText += Program.commandLineArguments[i] + " ";
                 }
-                this.Text += ": " + windowTitle;
-                PerformedTaskButton.Text = windowTitle;
+                this.Text = reminderText + " - Periodic Reminder";
+                buttonTitle = reminderText;                
             }
+
+            PerformedTaskButton.Text = buttonTitle + "\n Reminder not set, click Start!";
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -72,7 +78,8 @@ namespace PeriodicReminder
         private void StartTimer()
         {
             timer = new System.Windows.Forms.Timer();
-            timer.Interval = (int)numericUpDown1.Value * 60000;
+            double nextTimeMS = (double)numericUpDown1.Value * 60000d;
+            timer.Interval = (int)nextTimeMS;
 
             //timer.Interval = 5000;  //---------------------------------------TEST---------------------------------
 
@@ -80,6 +87,10 @@ namespace PeriodicReminder
             //timer.AutoReset = true;
             timer.Enabled = true;
             timer.Start();
+
+            nextAlert = System.DateTime.Now.AddMilliseconds(nextTimeMS);
+            PerformedTaskButton.Text = buttonTitle + "\n \n Next: " + nextAlert.ToString("HH:mm");
+            
         }
 
         private void DebugTimerEvent(object sender, ElapsedEventArgs e)
@@ -93,12 +104,18 @@ namespace PeriodicReminder
             //blinkTimer.Interval = blinkFrequency;
             //blinkTimer.Enabled = true;
             //blinkTimer.Start();
-            timer.Interval = (int)numericUpDown2.Value *60000;
+
+            double nextTimeMS = (double)numericUpDown2.Value * 60000d;
+            timer.Interval = (int)nextTimeMS;
+            
             timer.Enabled = true;
             timer.Start();
             acknowledgedReminder = false;
             System.Media.SystemSounds.Beep.Play();
             FlashWindow.Flash(this);
+
+            nextAlert = System.DateTime.Now.AddMilliseconds(nextTimeMS);
+            PerformedTaskButton.Text = buttonTitle + "\n \n Next: " + nextAlert.ToString("HH:mm");
         }
 
         private void PerformedTask_Click(object sender, EventArgs e)
