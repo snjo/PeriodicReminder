@@ -1,7 +1,6 @@
 D:\Documents\GitHub\PeriodicReminder\PeriodicReminder\bin\Debug\PeriodicReminder.exe.config
 D:\Documents\GitHub\PeriodicReminder\PeriodicReminder\bin\Debug\PeriodicReminder.exe
 D:\Documents\GitHub\PeriodicReminder\PeriodicReminder\bin\Debug\PeriodicReminder.pdb
-D:\Documents\GitHub\PeriodicReminder\PeriodicReminder\obj\Debug\PeriodicReminder.csprojResolveAssemblyReference.cache
 D:\Documents\GitHub\PeriodicReminder\PeriodicReminder\obj\Debug\PeriodicReminder.Form1.resources
 D:\Documents\GitHub\PeriodicReminder\PeriodicReminder\obj\Debug\PeriodicReminder.Properties.Resources.resources
 D:\Documents\GitHub\PeriodicReminder\PeriodicReminder\obj\Debug\PeriodicReminder.csproj.GenerateResource.Cache
@@ -17,3 +16,5 @@ E:\Github\PeriodicReminder\PeriodicReminder\obj\Debug\PeriodicReminder.csproj.Ge
 E:\Github\PeriodicReminder\PeriodicReminder\obj\Debug\PeriodicReminder.csproj.CoreCompileInputs.cache
 E:\Github\PeriodicReminder\PeriodicReminder\obj\Debug\PeriodicReminder.exe
 E:\Github\PeriodicReminder\PeriodicReminder\obj\Debug\PeriodicReminder.pdb
+D:\Documents\GitHub\PeriodicReminder\PeriodicReminder\obj\Debug\PeriodicReminder.csprojAssemblyReference.cache
+D:\Documents\GitHub\PeriodicReminder\PeriodicReminder\obj\Debug\PeriodicReminder.csproj.CoreCompileInputs.cache
