@@ -78,7 +78,9 @@ namespace PeriodicReminder
         private void StartTimer()
         {
             timer = new System.Windows.Forms.Timer();
-            double nextTimeMS = (double)numericUpDown1.Value * 60000d;
+            //double nextTimeMS = (double)numericUpDown1.Value * 60000d;
+            double nextTimeMS = dateTimePicker1.Value.Subtract(DateTime.Now).TotalMilliseconds;
+            if (nextTimeMS < 1000d) nextTimeMS = 1000d;
             timer.Interval = (int)nextTimeMS;
 
             //timer.Interval = 5000;  //---------------------------------------TEST---------------------------------
@@ -89,7 +91,7 @@ namespace PeriodicReminder
             timer.Start();
 
             nextAlert = System.DateTime.Now.AddMilliseconds(nextTimeMS);
-            PerformedTaskButton.Text = buttonTitle + "\n \n Next: " + nextAlert.ToString("HH:mm");
+            PerformedTaskButton.Text = buttonTitle + "\n \n Next: " + nextAlert.ToString("HH:mm\nyyyy-MM-dd");
             
         }
 
@@ -115,7 +117,7 @@ namespace PeriodicReminder
             FlashWindow.Flash(this);
 
             nextAlert = System.DateTime.Now.AddMilliseconds(nextTimeMS);
-            PerformedTaskButton.Text = buttonTitle + "\n \n Next: " + nextAlert.ToString("HH:mm");
+            PerformedTaskButton.Text = buttonTitle + "\n \n Next: " + nextAlert.ToString("HH:mm\nyyyy-MM-dd");
         }
 
         private void PerformedTask_Click(object sender, EventArgs e)
