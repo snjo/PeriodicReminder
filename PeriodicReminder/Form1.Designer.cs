@@ -44,7 +44,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PerformedTaskButton.Location = new System.Drawing.Point(12, 73);
             this.PerformedTaskButton.Name = "PerformedTaskButton";
-            this.PerformedTaskButton.Size = new System.Drawing.Size(260, 161);
+            this.PerformedTaskButton.Size = new System.Drawing.Size(250, 161);
             this.PerformedTaskButton.TabIndex = 0;
             this.PerformedTaskButton.Text = "I did the thing";
             this.PerformedTaskButton.UseVisualStyleBackColor = true;
@@ -76,26 +76,27 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(87, 18);
+            this.label1.Location = new System.Drawing.Point(85, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 13);
+            this.label1.Size = new System.Drawing.Size(104, 13);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Minutes to first alert";
+            this.label1.Text = "Time of first reminder";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(75, 41);
+            this.label2.Location = new System.Drawing.Point(73, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(146, 13);
+            this.label2.Size = new System.Drawing.Size(136, 13);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Minutes between future alerts";
+            this.label2.Text = "Minutes between reminders";
             // 
             // StartTimerButton
             // 
-            this.StartTimerButton.Location = new System.Drawing.Point(227, 8);
+            this.StartTimerButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.StartTimerButton.Location = new System.Drawing.Point(212, 8);
             this.StartTimerButton.Name = "StartTimerButton";
-            this.StartTimerButton.Size = new System.Drawing.Size(45, 51);
+            this.StartTimerButton.Size = new System.Drawing.Size(50, 51);
             this.StartTimerButton.TabIndex = 5;
             this.StartTimerButton.Text = "Start";
             this.StartTimerButton.UseVisualStyleBackColor = true;
@@ -114,7 +115,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 246);
+            this.ClientSize = new System.Drawing.Size(274, 246);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.StartTimerButton);
             this.Controls.Add(this.label2);
