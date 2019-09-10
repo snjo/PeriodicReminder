@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,7 @@ namespace PeriodicReminder
         int blinkFrequency = 5000;
         string reminderText = "I did the thing";
         string windowTitle = "Periodic Reminder";
-        string buttonTitle = "I did the thing";
+        string buttonTitle = "I did the thing";        
         DateTime nextAlert;
 
         //System.Timers.Timer debugTimer;
@@ -31,18 +32,72 @@ namespace PeriodicReminder
         public Form1()
         {
             InitializeComponent();
+            bool doStartTimer = false;
+
             if (Program.commandLineArguments.Length > 0)
             {
                 reminderText = "";
-                for (int i = 0; i < Program.commandLineArguments.Length; i++)
+
+                // handle command line arguments. any non-slashed text gets set as the button and window text.
+                //  Examples:
+                //  PeriodicReminder.exe /m 00 /start /i 120 Take your medication
+                //  PeriodicReminder.exe Take your medication
+                //  PeriodicReminder.exe Go to bed /t 23:30 /i 1440
+
+                int arguments = Program.commandLineArguments.Length;
+                for (int i = 0; i < arguments; i++)
                 {
-                    reminderText += Program.commandLineArguments[i] + " ";
+                    string newArgument = Program.commandLineArguments[i];
+
+                    if (newArgument.Substring(0, 1) == "/")
+                    {
+                        if (i + 1 < arguments)
+                        {
+                            if (newArgument == "/m") //     /m - preform first task at the H:m mark, e.g. if it's 11:50, /m 34 happens at 12:34
+                            {
+                                dateTimePicker1.Value = DateTime.Today.AddHours(DateTime.Now.Hour);
+                                dateTimePicker1.Value = dateTimePicker1.Value.AddMinutes(double.Parse(Program.commandLineArguments[i + 1]));
+                                if (dateTimePicker1.Value < DateTime.Now)
+                                {
+                                    dateTimePicker1.Value = dateTimePicker1.Value.AddHours(1d);
+                                }
+                                i++;
+                            }
+                            else if (newArgument == "/t") //     /t - preform first task at the specified time
+                            {
+                                TimeSpan firstTime = TimeSpan.Parse(Program.commandLineArguments[i + 1]);
+                                dateTimePicker1.Value = DateTime.Today.Add(firstTime);
+                                if (dateTimePicker1.Value < DateTime.Now)
+                                {
+                                    dateTimePicker1.Value = dateTimePicker1.Value.AddDays(1d);
+                                }
+                                i++;
+                            }
+                            else if (newArgument == "/i") //    /i - set interval between alerts
+                            {
+                                numericUpDown2.Value = decimal.Parse( Program.commandLineArguments[i + 1] );
+                                i++;
+                            }
+                        }
+                        if (newArgument == "/start") // auto start the timer when the program starts
+                        {
+                            doStartTimer = true;
+                        }
+                    }
+
+                    else
+                    {
+                        reminderText += Program.commandLineArguments[i] + " ";
+                    }
                 }
                 this.Text = reminderText + " - Periodic Reminder";
                 buttonTitle = reminderText;                
             }
+            
+            PerformedTaskButton.Text = buttonTitle + "\n Reminder not set, click Start!";            
 
-            PerformedTaskButton.Text = buttonTitle + "\n Reminder not set, click Start!";
+
+            if (doStartTimer) StartTimer();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -76,7 +131,7 @@ namespace PeriodicReminder
         }
 
         private void StartTimer()
-        {
+        {            
             timer = new System.Windows.Forms.Timer();
             //double nextTimeMS = (double)numericUpDown1.Value * 60000d;
             double nextTimeMS = dateTimePicker1.Value.Subtract(DateTime.Now).TotalMilliseconds;
@@ -91,8 +146,7 @@ namespace PeriodicReminder
             timer.Start();
 
             nextAlert = System.DateTime.Now.AddMilliseconds(nextTimeMS);
-            PerformedTaskButton.Text = buttonTitle + "\n \n Next: " + nextAlert.ToString("HH:mm\nyyyy-MM-dd");
-            
+            PerformedTaskButton.Text = buttonTitle + "\n \n Next: " + nextAlert.ToString("HH:mm\nyyyy-MM-dd");                     
         }
 
         private void DebugTimerEvent(object sender, ElapsedEventArgs e)
