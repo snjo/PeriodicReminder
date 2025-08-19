@@ -15,15 +15,18 @@ namespace PeriodicReminder
     public partial class Form1 : Form
     {
         System.Windows.Forms.Timer timer;
-        System.Timers.Timer blinkTimer2;
+        //System.Timers.Timer blinkTimer2;
         bool acknowledgedReminder = true;
         List<Color> BlinkColors = new List<Color> { Color.Red, Color.Yellow, Color.Orange };
+        List<Icon> BlinkIcons;
         int blinkCounter = 0;
         int blinkFrequency = 5000;
         string reminderText = "I did the thing";
         string windowTitle = "Periodic Reminder";
         string buttonTitle = "I did the thing";        
         DateTime nextAlert;
+        Icon bellIcon1;
+        Icon bellIcon2;
 
         //System.Timers.Timer debugTimer;
         //float minutes = 56f;
@@ -32,7 +35,9 @@ namespace PeriodicReminder
         public Form1()
         {
             InitializeComponent();
+            BlinkIcons = new List<Icon> { this.Icon, notifyIcon1.Icon };
             bool doStartTimer = false;
+            Icon = notifyIcon1.Icon;
 
             if (Program.commandLineArguments.Length > 0)
             {
@@ -102,7 +107,7 @@ namespace PeriodicReminder
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            CreateBlinkTimer();
+            //CreateBlinkTimer();
             //StartTimer();
 
             //debugTimer = new System.Timers.Timer(minutes * 60000);
@@ -111,20 +116,21 @@ namespace PeriodicReminder
             //debugTimer.Enabled = true;
         }
 
-        private void CreateBlinkTimer()
-        {
-            blinkTimer2 = new System.Timers.Timer(blinkFrequency);
-
-            blinkTimer2.Elapsed += blinkTick;
-            blinkTimer2.AutoReset = true;
-            blinkTimer2.Enabled = true;
-        }
+        //private void CreateBlinkTimer()
+        //{
+        //    blinkTimer2 = new System.Timers.Timer(blinkFrequency);
+            
+        //    blinkTimer2.Elapsed += blinkTick;
+        //    blinkTimer2.AutoReset = true;
+        //    blinkTimer2.Enabled = true;
+        //}
 
         private void blinkTick(object sender, ElapsedEventArgs e)
         {
             if (acknowledgedReminder == false)
             {
                 PerformedTaskButton.BackColor = BlinkColors[blinkCounter % BlinkColors.Count];
+                this.Icon = BlinkIcons[blinkCounter % BlinkIcons.Count];
                 //PerformedTaskButton.Text = "" + blinkCounter % BlinkColors.Count;
                 blinkCounter++;
             }
@@ -198,7 +204,7 @@ namespace PeriodicReminder
 
         private void blinkTimer_Tick(object sender, EventArgs e)
         {
-            //blinkTick();
+            blinkTick(sender,null);
         }
     }
 }
